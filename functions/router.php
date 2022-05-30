@@ -1,16 +1,22 @@
 <?php
 require "functions.php";
 
+function run($method)
+{
+    if($method == 'GET'){
+       return get($_GET['url']);
+    }elseif($method == 'POST'){
+      return  post($_POST);
+    }
+}
+
 function get($url)
 {
 
    $tab = explode("/",$url) ;
-   $page = $tab[0];
    $param = isset($tab[1]) ? $tab[1] : null ;
    return execute($url,$param);
 }
-
-
 
 function matches($url,$param)
 {
