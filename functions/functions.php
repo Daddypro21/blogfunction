@@ -8,9 +8,9 @@ function posts()
 {
     echo "Je suis la page qui affiche les posts";
 }
-function post()
+function post($param)
 {
-    echo "Je suis la page qui affiche un post";
+    echo "Je suis la page qui affiche le post {$param}";
 }
 
 function contact()
