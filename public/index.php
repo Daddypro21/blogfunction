@@ -1,7 +1,7 @@
 <?php
 require "../functions/router.php";
 
- //var_dump($_GET['url']);die;
+ //var_dump($_GET);die;
+run($_SERVER['REQUEST_METHOD']);
 
- get($_GET['url']);
 
