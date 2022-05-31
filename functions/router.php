@@ -13,7 +13,7 @@ function get($url)
 
    $tab = explode("/",$url) ;
    $param = isset($tab[1]) ? $tab[1] : null ;
-   return execute($url,$param);
+   execute($url,$param);
 }
 
 function matches($url,$param)
@@ -49,7 +49,7 @@ function execute($url,$param)
         return $controller = isset($values[1]) ? $function($values[1]) : $function() ;
         
        }else{
-           return error404();
+           error404();
        }
 }
 
