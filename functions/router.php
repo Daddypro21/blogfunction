@@ -1,6 +1,4 @@
 <?php
-require "functions.php";
-
 function run($method)
 {
     if($method == 'GET'){
