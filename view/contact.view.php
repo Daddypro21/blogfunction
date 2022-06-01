@@ -5,5 +5,5 @@
 
 <?php 
 $content = ob_get_clean();
-require "./template/tmpl.php";
+require "../template/tmpl.php";
 ?>
