@@ -21,7 +21,7 @@ function get($method)
     
         if(isset($tab))
         {
-            if(($function !="post") && ($tab !="")){
+            if((($function !="post") && (!empty($tab))) ||($function =="post") && (empty($tab))){
                error404();
                die;
             }
@@ -35,5 +35,10 @@ function get($method)
     {
         error404();
     }
+}
+
+function post($method)
+{
+
 }
 
