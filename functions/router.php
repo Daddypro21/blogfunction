@@ -18,14 +18,14 @@ function get($method)
     {
         unset($tab[0]);
         
-    
+
         if(isset($tab))
         {
             // var_dump($function);die;
-            if((($function !="post") && (!empty($tab))) ||($function =="post") && (empty($tab))){
-               error404();
-               die;
-            }
+            // if((($function !="post") && (!empty($tab))) ||($function =="post") && (empty($tab))){
+            //    error404();
+            //    die;
+            // }
 
             return call_user_func_array($function, $tab);
         
