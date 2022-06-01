@@ -1,4 +1,5 @@
 <?php
+require "../database/model.php";
 function home()
 {
   view("home.view");
@@ -7,9 +8,11 @@ function posts()
 {
     view("posts.view");
 }
-function post($data)
+function post($id)
 {
-    view("post.view",array($data));//petit exemple
+    $datas = getId("posts",$id);
+    foreach($datas as $data );
+    view("post.view",$data);//petit exemple
 }
 
 function contact()
