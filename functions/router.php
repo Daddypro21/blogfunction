@@ -21,9 +21,9 @@ function get($method)
     
         if(isset($tab))
         {
-            if(($function =="contact") && ($tab !="")){
-                echo "Cette page n'accepte pas les paramètre!";
-                die;
+            if(($function !="post") && ($tab !="")){
+               error404();
+               die;
             }
 
             return call_user_func_array($function, $tab);
