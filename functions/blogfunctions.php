@@ -8,11 +8,15 @@ function posts()
 {
     view("posts.view");
 }
-function post($id)
+function post($id=null)
 {
+    if($id == null){
+        view("posts.view");
+        die;
+    }
     $datas = getId("posts",$id);
-    foreach($datas as $data );
-    view("post.view",$data);//petit exemple
+    //foreach($datas as $data );
+    view("post.view",$datas);//petit exemple
 }
 
 function contact()
