@@ -8,48 +8,32 @@ function run($method)
     }
 }
 
-function get($url)
+function get($method)
 {
+    $tab = explode('/', $method);
 
-   $tab = explode("/",$url) ;
-   $param = isset($tab[1]) ? $tab[1] : null ;
-   execute($url,$param);
-}
+    $function = $tab[0]!="" ? $tab[0] : 'home';
 
-function matches($url,$param)
-{
-    $response = "";
-
-    $home = "";
-    $posts = "posts";
-    $post = "posts/{$param}";
-    $contact = "contact";
-
-    $response .= ($home == $url) ? true : false;
-    $response .= ($posts == $url) ? true : false;
-    $response .= ($post == $url) ? true : false;
-    $response .= ($contact == $url) ? true : false;
-
-    return $response ;
-    
-
-}
-
-function execute($url,$param)
-{
-    if(matches($url,$param)){
-        $returnValue = match($url){
-            ""=>"home",
-            "posts"=>"posts",
-            "posts/{$param}"=>"post/{$param}",
-            "contact"=>"contact"
-        };
-        $values = explode('/',$returnValue);
-        $function = $values[0];
-        return $controller = isset($values[1]) ? $function($values[1]) : $function() ;
+    if(function_exists($function))
+    {
+        unset($tab[0]);
         
-       }else{
-           error404();
-       }
+    
+        if(isset($tab))
+        {
+            if(($function =="contact") && ($tab !="")){
+                echo "Cette page n'accepte pas les paramètre!";
+                die;
+            }
+
+            return call_user_func_array($function, $tab);
+        
+        }
+            
+    }
+    else
+    {
+        error404();
+    }
 }
 
