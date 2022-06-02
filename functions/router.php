@@ -14,26 +14,22 @@ function get($method)
 
     $function = $tab[0]!="" ? $tab[0] : 'home';
 
-    if(function_exists($function))
-    {
+    if(function_exists($function)){
         unset($tab[0]);
         
 
-        if(isset($tab))
-        {
-            // var_dump($function);die;
-            // if((($function !="post") && (!empty($tab))) ||($function =="post") && (empty($tab))){
-            //    error404();
-            //    die;
-            // }
+        if(isset($tab)){
+            if($method =="post"){
+                error404();
+                die;
+            }
 
             return call_user_func_array($function, $tab);
         
         }
             
     }
-    else
-    {
+    else{
         error404();
     }
 }

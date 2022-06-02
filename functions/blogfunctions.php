@@ -6,17 +6,17 @@ function home()
 }
 function posts()
 {
-    view("posts.view");
+    $datas['data'] = getAll("posts");
+    view("posts.view",$datas);
 }
-function post($id=null)
+function post($id)
 {
     if($id == null){
-        view("posts.view");
+        header("location:../../blogfunction/posts");
         die;
     }
-    $datas = getId("posts",$id);
-    //foreach($datas as $data );
-    view("post.view",$datas);//petit exemple
+    $datas = findById("posts",$id);
+    view("post.view",$datas);
 }
 
 function contact()
