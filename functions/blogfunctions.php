@@ -6,7 +6,7 @@ function home()
 }
 function posts()
 {
-    $datas['data'] = getAll("posts");
+    $datas['data'] = getOneOrAll("posts");
     view("posts.view",$datas);
 }
 function post($id)
@@ -15,7 +15,7 @@ function post($id)
         header("location:../../blogfunction/posts");
         die;
     }
-    $datas = findById("posts",$id);
+    $datas = getOneOrAll("posts",$id);
     view("post.view",$datas);
 }
 
