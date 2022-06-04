@@ -2,30 +2,29 @@
 function run($method)
 {
     if($method == 'GET'){
-       return get($_GET['url']);
+       return getMethod($_REQUEST['url']);
     }elseif($method == 'POST'){
-      return  post($_POST);
+      return  postMethod($_REQUEST);
     }
+
 }
 
-function get($method)
+function getMethod($method)
 {
-    $tab = explode('/', $method);
+    //.....Example
+    $tableau = explode('/', $method);
 
-    $function = $tab[0]!="" ? $tab[0] : 'home';
+    $function = $tableau[0]!="" ? $tableau[0] : 'home';
 
     if(function_exists($function)){
-        unset($tab[0]);
-        
-
-        if(isset($tab)){
+        unset($tableau[0]);
+        if(isset($tableau)){
             if($method =="post"){
                 error404();
                 die;
             }
 
-            return call_user_func_array($function, $tab);
-        
+            return call_user_func_array($function, $tableau);
         }
             
     }
@@ -34,8 +33,29 @@ function get($method)
     }
 }
 
-// function post($method)
-// {
+function postMethod($method)
+{
+    //....Example
+    $tableau = explode('/', $method['url']);
 
-// }
+    $function = $tableau[0]!="" ? $tableau[0] : 'home';
+
+    if(function_exists($function)){
+        unset($tableau[0]);
+        
+        if(isset($tableau)){
+            if($method['url'] ==="updatePost"){
+                error404();
+                die;
+            }
+            unset($method['url']);
+            $tableau['post'] = $method;
+            return call_user_func_array($function, [$tableau]);
+        }
+            
+    }
+    else{
+        error404();
+    }
+}
 
