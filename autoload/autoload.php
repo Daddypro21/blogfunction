@@ -18,12 +18,13 @@ function autoload()
     }
 
     /**
-     * Ce fichier a été déplacé dans un dossier different,raison pour laquelle
+     *Ce fichier a été déplacé dans un dossier different,raison pour laquelle
      *elle n'est pas pris en charge dans la boucle foreach et n'est pas appélé
      *dynamiquement...ce problème sera résolu,car nous continuons à travailler
      *sur le projet
      */
     
     require "../functions/view/view.php";
+    require "../database/model.php";
 }
 autoload();
