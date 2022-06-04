@@ -1,23 +1,6 @@
 <?php
 require "getPdo.php";
 
-// //Exemple
-// function findById($table=null,$id=null)
-// {
-//     $req = getPdo()->prepare("SELECT * FROM $table WHERE id=?");
-//     $req->execute([$id]);
-//     return $req->fetch();
-// }
-
-// function getAll($table)
-// {
-//     $req = getPdo()->query("SELECT * FROM $table ORDER BY id DESC");  
-//     $data = $req->fetchAll() ;
-//     return $data;
-// }
-
-
-
 /*
     fonction permettant d'afficher toutes les informations ou une seule information specifique
 
@@ -29,7 +12,7 @@ function getOneOrAll(string $table,$id=null)
 {
     if($id===null)
     {
-        $getPosts = getPdo()->query("SELECT * FROM $table ORDER BY id DESC");
+        $getPosts = getPdo()->query("SELECT * FROM $table ORDER BY id DESC ");
 
         $data = $getPosts->fetchAll();
 
@@ -102,7 +85,7 @@ function create(string $table, array $tableau)
     
     $keys = implode(', ', $keys);
     
-    $values = implode(', ', $values);    
+    $values = implode(', ', $values); 
     
     $sql = "INSERT INTO $table($keys) VALUES ($values)";
     
@@ -115,5 +98,34 @@ function create(string $table, array $tableau)
         return 'ajout effectué avec succès';
     }
 }
+
+function update(string $table, array $tableau, int $id)
+{
+
+    foreach($tableau as $key=>$value)
+    {
+        $keys[] = $key.'=:'.$key;
+    }
+
+    $keys = implode(', ', $keys);
+
+    $sql = "UPDATE $table SET $keys WHERE id=:id";
+
+    $req = getPdo()->prepare($sql, [PDO::ATTR_CURSOR=>PDO::CURSOR_FWDONLY]);
+
+    $tableau['id']=$id;
+    
+    return var_dump($req->execute($tableau));
+
+}
+
+//...Example
+function delete($table,$id)
+{
+    $req = getPdo()->prepare("DELETE FROM {$table} WHERE id = ?");
+    $req->execute([$id]);
+    return $req;
+}
+
 
 
