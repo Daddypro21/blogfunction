@@ -1,5 +1,4 @@
 <?php
-require "../database/model.php";
 function home()
 {
   view("home.view");
